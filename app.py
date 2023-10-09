@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -8,7 +8,27 @@ def index():
 
 @app.get("/yt")
 def yt():
-  import pytube
+  from pytube import YouTube
+  from urllib.parse import unquote
+  url = request.args.get("url")
+  if not url:
+    return "URL is required!"
+  else:
+    url = unquote(url)
+  try:
+    yt = YouTube(url)
+    streams = yt.streams
+    video_streams = streams.filter(progressive=False, only_video=True)
+    # audio_streams = streams.filter(progressive=False, only_audio=True)
+    methods = [ method for method in dir(video_streams) if not method.startswith("_") ]
+    json_data = {}
+    for method in methods:
+      prop = getattr(video_streams, method)
+      if not callable(prop):
+        json_data[method] = prop
+    return jsonify(json_data)
+  except Exception as e:
+    return "Something went wrong!"
 
 if __name__ == "__main__":
   import sys
