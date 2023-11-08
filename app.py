@@ -12,7 +12,7 @@ def yt():
   from pytube import YouTube
   from urllib.parse import unquote
 
-  url = request.args.get("url")
+  url = request.args.get("url") # parameter
 
   if not url: return "URL is required!"
   
