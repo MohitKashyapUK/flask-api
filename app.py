@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ def index():
 
 @app.get("/yt")
 def yt():
-  from pytube import YouTube, request
+  from pytube import YouTube
   from urllib.parse import unquote
   
   URL = unquote(request.args.get("url"))
@@ -43,7 +43,7 @@ def yt():
       obj["with_audio" if stream_obj.is_progressive == True else "without_audio"].append(custom_streams)
     else:
       obj["only_audio"].append(custom_streams)
-  return obj
+  return jsonify(obj)
 
 if __name__ == "__main__":
   import sys
