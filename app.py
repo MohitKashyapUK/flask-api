@@ -13,4 +13,4 @@ def index():
 # Ye code YouTube kee videos kee information deta hai
 @app.get("/yt")
 def yt():
-  return youtube(unquote(request.args.get("url")))
+  return youtube.youtube(unquote(request.args.get("url")))
