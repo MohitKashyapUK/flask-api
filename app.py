@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 
 from urllib.parse import unquote
-import pytube
+from pytube import YouTube
 
 app = Flask(__name__)
 
