@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from urllib.parse import unquote
 
-from modules import *
+from main_modules import *
 
 app = Flask(__name__)
 
