@@ -1,6 +1,6 @@
 from pytube import YouTube
 
-def yt(URL):
+def youtube(URL):
   # URL = unquote(request.args.get("url"))
 
   # Initializing the downloader
